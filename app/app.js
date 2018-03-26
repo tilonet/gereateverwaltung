@@ -1,7 +1,14 @@
 (function(){
   'use strict';
 
-  var appGereateVerwaltung = angular.module('appGereateVerwaltung', ['ui.router', 'content', 'menue']);
+  var appGereateVerwaltung = angular.module('appGereateVerwaltung', [
+      'ui.router',
+      'ngResource',
+      'menue',
+      'user',
+      'device',
+      'department'
+  ]);
 
   appGereateVerwaltung.config(function($stateProvider, $urlRouterProvider){
 
@@ -15,7 +22,7 @@
                         templateUrl: 'components/menue/menue.html',
                     },
                     'content': {
-                        templateUrl: 'components/content/content.html'
+                        template: 'HOME'
                     }
                 }
             })

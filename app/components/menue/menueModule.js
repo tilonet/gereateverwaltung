@@ -2,6 +2,7 @@
     'use strict';
 
     angular.module('menue', [
-        'ui.router'
+        'ui.router',
+        'user'
     ]);
 })();

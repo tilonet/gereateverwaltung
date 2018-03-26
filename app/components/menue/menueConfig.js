@@ -12,20 +12,22 @@
                         templateUrl: 'components/menue/menue.html',
                     },
                     'content@': {
-                        template: 'user'
+                        templateUrl: 'components/user/user.html',
+                        controller: 'UserController'
                     }
                 }
             });
         $stateProvider
-            .state('departmends',{
-                name: 'departmends',
-                url: '/departmends',
+            .state('departments',{
+                name: 'departments',
+                url: '/departments',
                 views: {
                     'menue': {
                         templateUrl: 'components/menue/menue.html',
                     },
                     'content@': {
-                        template: 'departmends'
+                        templateUrl: 'components/departments/department.html',
+                        controller: 'DepartmentController'
                     }
                 }
             });
@@ -38,11 +40,11 @@
                         templateUrl: 'components/menue/menue.html',
                     },
                     'content@': {
-                        template: 'devices'
+                        templateUrl: 'components/devices/device.html',
+                        controller: 'DeviceController'
                     }
                 }
             });
-
     });
 
 })();

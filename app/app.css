@@ -33,6 +33,7 @@ header{
 .menue a{
     color: black;
     cursor: pointer;
+    font-size: x-large;
 }
 .active{
     color: red;

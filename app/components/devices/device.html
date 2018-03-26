@@ -1,0 +1,27 @@
+<div ng-controller="DeviceController">
+    <h2>Geräte</h2>
+    <form>
+        <div class="form-group">
+            <div class="col-md-2">
+                <input ng-model="$ctrl.query" type="text" class="form-control " id="searchInput" placeholder="Suchfeld">
+            </div>
+        </div>
+    </form>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Status</th>
+            <th>Administrator</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="device in entries | filter: $ctrl.query">
+            <td>{{device.id}}</td>
+            <td>{{device.name}}</td>
+            <td>{{device.deviceStatus}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>

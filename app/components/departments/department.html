@@ -1,0 +1,26 @@
+<div ng-controller="DepartmentController">
+    <h2>Abteilungen</h2>
+    <form>
+        <div class="form-group">
+            <div class="col-md-2">
+                <input ng-model="$ctrl.query" type="text" class="form-control " id="searchInput" placeholder="Suchfeld">
+            </div>
+        </div>
+    </form>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Abkürzung</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="department in entries | filter: $ctrl.query">
+            <td>{{department.id}}</td>
+            <td>{{department.name}}</td>
+            <td>{{department.abbreviation}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
