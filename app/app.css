@@ -1,0 +1,39 @@
+html,body,.container{
+    height:100%;
+}
+.container{
+    display:table;
+    width: 100%;
+    margin-top: -50px;
+    padding: 50px 0 0 0; /*set left/right padding according to needs*/
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    max-width: none;
+}
+header{
+    background: #2a6496;
+    height: 50px;
+}
+.row{
+    height: 100%;
+    display: table-row;
+}
+@media (min-width: 992px){
+    .row .no-float {
+        display: table-cell;
+        float: none;
+    }
+}
+.menue{
+    background: #2a6496;
+}
+.menue ul{
+    list-style-type: none;
+}
+.menue a{
+    color: black;
+    cursor: pointer;
+}
+.active{
+    color: red;
+}
