@@ -1,0 +1,34 @@
+<h2>Benutzer bearbeiten</h2>
+<form ng-submit="submit($event)" ng-controller="UserController">
+    <div class="col-xs-12 col-md-6 col-lg-offset-1">
+        <div class="form-group">
+            <label for="nameFirst">Vorname</label>
+            <input type="text" class="form-control" id="nameFirst" ng-model="user.nameFirst" placeholder="">
+        </div>
+    </div>
+    <div class="col-xs-12 col-md-6 col-lg-offset-1">
+        <div class="form-group">
+            <label for="nameLast">Nachname</label>
+            <input type="text" class="form-control" id="nameLast" ng-model="user.nameLast" placeholder="">
+        </div>
+    </div>
+    <div class="col-xs-12 col-md-6 col-lg-offset-1">
+        <div class="form-group">
+            <label for="email">E-Mail</label>
+            <input type="email" class="form-control" id="email"  ng-model="user.email" placeholder="">
+        </div>
+    </div>
+    <div class="col-xs-12 col-md-6 col-lg-offset-1">
+        <div class="form-group">
+            <label for="selectbox">Abteilung</label>
+            <select id="selectbox" ng-model="user.depatmentId">
+
+                <option ng-value="option.id" ng-selected="option.id == user.departmentId"  ng-repeat="option in departments">{{option.name}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-xs-12 col-lg-offset-1">
+        <a ui-sref="user" class="btn btn-danger"><i class="far fa-arrow-alt-circle-left"></i> zurück</a>
+        <input type="submit" value="speichern" name="submit" id="submit" class="btn btn-success">
+    </div>
+</form>

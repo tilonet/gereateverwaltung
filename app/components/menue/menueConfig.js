@@ -1,7 +1,7 @@
 (function(){
     'use strict';
 
-    angular.module('menue').config(function($stateProvider, $urlRouterProvider) {
+    angular.module('menue').config(function($stateProvider) {
 
         $stateProvider
             .state('user',{

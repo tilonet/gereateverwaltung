@@ -1,5 +1,6 @@
 <div ng-controller="UserController">
     <h2>Benutzer</h2>
+    <p style="cursor: pointer"> Benutzer hinzufügen <i style="color: green;" class="fas fa-plus"></i> </p>
     <form>
         <div class="form-group">
             <div class="col-md-2">
@@ -23,7 +24,11 @@
                 <td>{{user.nameFirst}}</td>
                 <td>{{user.nameLast}}</td>
                 <td>{{user.email}}</td>
-                <td>{{user.departmentId}}</td>
+                <td>{{user.department}}</td>
+                <td>
+                    <a title="Benutzer bearbeiten" ui-sref="editUser({id: user.id})" ui-sref-active="active"> <i class="fa fa-edit" style="cursor: pointer;"></i></a>
+                    <a title="Benutzer löschen" ui-sref="deleteUser({id: user.id})" ui-sref-active="active"> <i class="fa fa-minus-circle" style="color: red; cursor: pointer;"></i></a>
+                </td>
             </tr>
         </tbody>
     </table>
