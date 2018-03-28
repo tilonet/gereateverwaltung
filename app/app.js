@@ -7,25 +7,35 @@
       'menue',
       'user',
       'device',
-      'department'
+      'department',
+      'ui-notification'
   ]);
 
-  appGereateVerwaltung.config(function($stateProvider, $urlRouterProvider){
+  appGereateVerwaltung.config(function($stateProvider, $urlRouterProvider, NotificationProvider){
 
-        $urlRouterProvider.otherwise('/home');
+      $urlRouterProvider.otherwise('/home');
 
-        $stateProvider
-            .state('home',{
-                url: '/home',
-                views: {
-                    'menue': {
-                        templateUrl: 'components/menue/menue.html',
-                    },
-                    'content': {
-                        template: 'HOME'
-                    }
+      NotificationProvider.setOptions({
+          delay: 10000,
+          startTop: 20,
+          startRight: 10,
+          verticalSpacing: 20,
+          horizontalSpacing: 20,
+          positionX: 'left',
+          positionY: 'bottom'
+      });
+
+    $stateProvider
+        .state('home',{
+            url: '/home',
+            views: {
+                'menue': {
+                    templateUrl: 'components/menue/menue.html',
+                },
+                'content': {
+                    template: 'HOME'
                 }
-            })
+            }
+        })
     });
-
 })();

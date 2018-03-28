@@ -45,6 +45,21 @@
             }).update({ id: user.id }, user);
 
         }
+
+        factory.add = function(user) {
+
+            return $resource('http://localhost:8080/user', {}, {
+                save:{method: 'POST'}
+            }).save(user)
+        }
+
+        factory.delete = function(userid) {
+
+            return $resource('http://localhost:8080/user/:id', {id: '@id'}, {
+                delete: {method: 'DELETE'}
+            }).delete({ id: userid});
+        }
+
         return factory;
     }]);
 })();

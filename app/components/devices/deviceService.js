@@ -25,14 +25,43 @@
                         id: item.id,
                         name: item.name,
                         deviceStatus: item.deviceStatus,
-                        department: ((item.departmentId !== 0) ? $filter('filter')(departments, {id: item.departmentId}, true)[0].name : 'none'),
-                        user: ((item.assignedUserId !== 0) ? $filter('filter')(users, {id: item.assignedUserId}, true)[0].nameLast : 'none'),
-                        admin: ((item.deviceAdministratorId !== 0) ? $filter('filter')(users, {id: item.deviceAdministratorId}, true)[0].nameLast : 'none')
+                        department: ((item.departmentId !== null) ? $filter('filter')(departments, {id: item.departmentId}, true)[0].name : 'none'),
+                        user: ((item.assignedUserId !== null) ? $filter('filter')(users, {id: item.assignedUserId}, true)[0].nameLast : 'none'),
+                        admin: ((item.deviceAdministratorId !== null) ? $filter('filter')(users, {id: item.deviceAdministratorId}, true)[0].nameLast : 'none')
                     });
                 });
             });
+
             return resultArr
         }
+
+        factory.getDevice = function(id) {
+            return $resource('http://localhost:8080/device/'+id).get();
+        }
+
+        factory.update = function(user){
+            return $resource('http://localhost:8080/device/:id', { id: '@_id' }, {
+                update: {
+                    method: 'PUT' // this method issues a PUT request
+                }
+            }).update({ id: user.id }, user);
+
+        }
+
+        factory.add = function(device) {
+
+            return $resource('http://localhost:8080/device', {}, {
+                save:{method: 'POST'}
+            }).save(device)
+        }
+
+        factory.delete = function(deviceid) {
+
+            return $resource('http://localhost:8080/device/:id', {id: '@id'}, {
+                delete: {method: 'DELETE'}
+            }).delete({ id: deviceid});
+        }
+
         return factory;
 
     }]);

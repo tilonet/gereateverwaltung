@@ -1,0 +1,20 @@
+<h2>Wer hat was?</h2>
+<div ng-controller="DeviceController">
+    <div border="1" ng-repeat="user in deviceusers">
+        <h3>{{user.nameFirst + " " +user.nameLast }} </h3>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Gerät</th>
+                <th>Typ</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="device in entries ">
+                <td>{{device.name}}</td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

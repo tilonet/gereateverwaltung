@@ -17,6 +17,7 @@
                     }
                 }
             });
+
         $stateProvider
             .state('departments',{
                 name: 'departments',
@@ -31,6 +32,7 @@
                     }
                 }
             });
+
         $stateProvider
             .state('devices',{
                 name: 'devices',
@@ -42,6 +44,27 @@
                     'content@': {
                         templateUrl: 'components/devices/device.html',
                         controller: 'DeviceController'
+                    }
+                }
+            });
+
+        $stateProvider
+            .state('listuserdevices',{
+                name: 'listuserdevices',
+                url: '/listuserdevices',
+                views: {
+                    'menue': {
+                        templateUrl: 'components/menue/menue.html',
+                    },
+                    'content@': {
+                        templateUrl: 'components/userdevices/userdevices.html',
+                        controller: function($scope, UserService){
+
+                            $scope.deviceusers = UserService.getAll();
+
+                            console.log($scope.deviceusers);
+
+                        }
                     }
                 }
             });

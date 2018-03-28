@@ -1,5 +1,6 @@
-<h2>Benutzer bearbeiten</h2>
-<form ng-submit="submit($event)" ng-controller="UserController">
+<h2 ng-show="userexist">Benutzer bearbeiten</h2>
+<h2 ng-hide="userexist">Benutzer erstellen</h2>
+<form  ng-controller="UserController">
     <div class="col-xs-12 col-md-6 col-lg-offset-1">
         <div class="form-group">
             <label for="nameFirst">Vorname</label>
@@ -21,14 +22,14 @@
     <div class="col-xs-12 col-md-6 col-lg-offset-1">
         <div class="form-group">
             <label for="selectbox">Abteilung</label>
-            <select id="selectbox" ng-model="user.depatmentId">
-
-                <option ng-value="option.id" ng-selected="option.id == user.departmentId"  ng-repeat="option in departments">{{option.name}}</option>
+            <select class="form-control" id="selectbox" ng-model="user.departmentId">
+                <option ng-value="option.id" ng-selected="option.id === user.departmentId"  ng-repeat="option in departments">{{option.name}}</option>
             </select>
         </div>
     </div>
     <div class="col-xs-12 col-lg-offset-1">
         <a ui-sref="user" class="btn btn-danger"><i class="far fa-arrow-alt-circle-left"></i> zurück</a>
-        <input type="submit" value="speichern" name="submit" id="submit" class="btn btn-success">
+        <button ng-show="userexist" value="speichern" class="btn btn-success" ng-click="edit(user)">speichern</button>
+        <button ng-hide="userexist" class="btn btn-success" ng-click="addNew(user)">hinzufügen</button>
     </div>
 </form>

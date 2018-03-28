@@ -1,0 +1,21 @@
+<h2 ng-show="departmentexist">Abteilung bearbeiten</h2>
+<h2 ng-hide="departmentexist">Abteilung erstellen</h2>
+<form ng-submit="submit($event)" ng-controller="DepartmentController">
+    <div class="col-xs-12 col-md-6 col-lg-offset-1">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" ng-model="department.name" placeholder="">
+        </div>
+    </div>
+    <div class="col-xs-12 col-md-6 col-lg-offset-1">
+        <div class="form-group">
+            <label for="abbreviation">Abkürzung</label>
+            <input type="text" class="form-control" id="abbreviation" ng-model="department.abbreviation" placeholder="">
+        </div>
+    </div>
+    <div class="col-xs-12 col-lg-offset-1">
+        <a ui-sref="departments" class="btn btn-danger"><i class="far fa-arrow-alt-circle-left"></i> zurück</a>
+        <button ng-show="departmentexist" class="btn btn-success" ng-click="edit(department)">speichern</button>
+        <button ng-hide="departmentexist" class="btn btn-success" ng-click="addNew(department)">hinzufügen</button>
+    </div>
+</form>

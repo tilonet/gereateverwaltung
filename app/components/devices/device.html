@@ -1,5 +1,6 @@
 <div ng-controller="DeviceController">
     <h2>Geräte</h2>
+    <a ui-sref="addDevice" style="cursor: pointer"> Gerät hinzufügen <i style="color: green;" class="fas fa-plus"></i> </a>
     <form>
         <div class="form-group">
             <div class="col-md-2">
@@ -26,6 +27,10 @@
             <td>{{device.admin}}</td>
             <td>{{device.user}}</td>
             <td>{{device.department}}</td>
+            <td>
+                <a title="Gerät bearbeiten" ui-sref="editDevice({id: device.id})" ui-sref-active="active"> <i class="fa fa-edit" style="cursor: pointer;"></i></a>
+                <a title="Gerät löschen" ui-sref="deleteDevice({id: device.id})" ui-sref-active="active"> <i class="fa fa-minus-circle" style="color: red; cursor: pointer;"></i></a>
+            </td>
         </tr>
         </tbody>
     </table>
