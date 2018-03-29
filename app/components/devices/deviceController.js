@@ -3,7 +3,7 @@
 
     angular.module('device').controller('DeviceController',  function($scope, DeviceService, UserService, Notification){
 
-        $scope.entries = DeviceService.getAll();
+        $scope.entries = DeviceService.getAll().query();
         $scope.deviceStatus = [{key: 'IN_POSSESSION', trans:'im Besitzt'},
                                 {key: 'LOANED', trans: 'Verliehen'},
                                 {key: 'FREE', trans: 'Verfügbar' }];

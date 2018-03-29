@@ -4,35 +4,46 @@
     angular.module('device').factory('DeviceService', ['$resource', '$filter', '$q', function($resource, $filter, $q) {
 
         var factory = {};
+        var users = $resource('http://localhost:8080/user').query();
+        var departments = $resource('http://localhost:8080/department').query();
 
-        factory.getAll = function(){
+        factory.getAll = function () {
 
-            var devices =  $resource('http://localhost:8080/device').query().$promise;
-            var users = $resource('http://localhost:8080/user').query().$promise;
-            var departments = $resource('http://localhost:8080/department').query().$promise;
-            var resultArr = [];
+            return $resource('http://localhost:8080/device', {}, {
+                query: {
+                    method: 'GET',
+                    isArray: true, // <- not returning an array
+                    transformResponse: function (data) {
 
-            $q.all([users, devices, departments]).then(function(result) {
+                        var items = angular.fromJson(data);
 
-                var departments = result[2];
-                var devices = result[1];
-                var users = result[0];
+                        angular.forEach(items, function (item, idx) {
 
+                            item.admin = "none";
+                            item.department = "none";
+                            item.user = "none";
 
-                devices.map(function(item){
+                            var deviceadmin = $filter('filter')(users, {id: item.deviceAdministratorId}, true);
+                            var deviceuser = $filter('filter')(users, {id: item.assignedUserId}, true);
+                            var devicedepartment = $filter('filter')(departments, {id: item.departmentId}, true);
 
-                    resultArr.push({
-                        id: item.id,
-                        name: item.name,
-                        deviceStatus: item.deviceStatus,
-                        department: ((item.departmentId !== null) ? $filter('filter')(departments, {id: item.departmentId}, true)[0].name : 'none'),
-                        user: ((item.assignedUserId !== null) ? $filter('filter')(users, {id: item.assignedUserId}, true)[0].nameLast : 'none'),
-                        admin: ((item.deviceAdministratorId !== null) ? $filter('filter')(users, {id: item.deviceAdministratorId}, true)[0].nameLast : 'none')
-                    });
-                });
+                            if (deviceadmin.length > 0){
+                                item.admin = deviceadmin[0].nameFirst + " "+deviceadmin[0].nameLast;
+                            }
+
+                            if (typeof deviceuser[0] !== 'undefined') {
+                                item.user = deviceuser[0].nameFirst + " "+deviceuser[0].nameLast;;
+                            }
+
+                            if(typeof devicedepartment[0] !== 'undefined'){
+                                item.department = devicedepartment[0].name;
+                            }
+                        });
+
+                        return items;
+                    }
+                }
             });
-
-            return resultArr
         }
 
         factory.getDevice = function(id) {
@@ -45,7 +56,6 @@
                     method: 'PUT' // this method issues a PUT request
                 }
             }).update({ id: user.id }, user);
-
         }
 
         factory.add = function(device) {

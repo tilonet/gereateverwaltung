@@ -3,8 +3,8 @@
 
     angular.module('user').controller('UserController',  function($scope, UserService, DepartmentService, Notification){
 
-        $scope.entries = UserService.getAll();
-        $scope.departments = DepartmentService.getAll();
+        $scope.entries = UserService.getAll().query();
+        $scope.departments = DepartmentService.getAll().query();
 
         $scope.edit = function(e){
 

@@ -1,6 +1,6 @@
 <h2>Wer hat was?</h2>
 <div ng-controller="DeviceController">
-    <div border="1" ng-repeat="user in deviceusers">
+    <div border="1" ng-repeat="user in users" ng-if="user.userdevices.length">
         <h3>{{user.nameFirst + " " +user.nameLast }} </h3>
         <table class="table table-striped">
             <thead>
@@ -10,9 +10,9 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="device in entries ">
-                <td>{{device.name}}</td>
-                <td></td>
+            <tr ng-repeat="device in user.userdevices">
+                <td>{{device.device}}</td>
+                <td>{{device.typ}}</td>
             </tr>
             </tbody>
         </table>

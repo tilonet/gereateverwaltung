@@ -41,7 +41,11 @@
                         templateUrl: 'components/user/userUpdateForm.html',
                         controller: function($scope, DepartmentService){
 
-                            $scope.departments = DepartmentService.getAll();
+                           // $scope.departments[0] = {name: "Bitte "}
+                            $scope.departments = DepartmentService.getAll().query();
+
+                            //console.log( $scope.departments);
+
                             $scope.userexist = false;
                             $scope.user = {};
 

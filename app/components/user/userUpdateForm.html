@@ -1,35 +1,36 @@
 <h2 ng-show="userexist">Benutzer bearbeiten</h2>
 <h2 ng-hide="userexist">Benutzer erstellen</h2>
-<form  ng-controller="UserController">
+<form  name="userForm" ng-controller="UserController">
     <div class="col-xs-12 col-md-6 col-lg-offset-1">
         <div class="form-group">
             <label for="nameFirst">Vorname</label>
-            <input type="text" class="form-control" id="nameFirst" ng-model="user.nameFirst" placeholder="">
+            <input type="text" class="form-control" id="nameFirst" ng-model="user.nameFirst" required novalidate>
         </div>
     </div>
     <div class="col-xs-12 col-md-6 col-lg-offset-1">
         <div class="form-group">
             <label for="nameLast">Nachname</label>
-            <input type="text" class="form-control" id="nameLast" ng-model="user.nameLast" placeholder="">
+            <input type="text" class="form-control" id="nameLast" ng-model="user.nameLast" required novalidate>
         </div>
     </div>
     <div class="col-xs-12 col-md-6 col-lg-offset-1">
         <div class="form-group">
             <label for="email">E-Mail</label>
-            <input type="email" class="form-control" id="email"  ng-model="user.email" placeholder="">
+            <input type="email" class="form-control" id="email"  ng-model="user.email" required novalidate>
         </div>
     </div>
     <div class="col-xs-12 col-md-6 col-lg-offset-1">
         <div class="form-group">
-            <label for="selectbox">Abteilung</label>
-            <select class="form-control" id="selectbox" ng-model="user.departmentId">
+            <label for="departmentSelect">Abteilung</label>
+            <select class="form-control"  required id="departmentSelect" ng-model="user.departmentId">
+                <option selected>Bitte wählen</option>
                 <option ng-value="option.id" ng-selected="option.id === user.departmentId"  ng-repeat="option in departments">{{option.name}}</option>
             </select>
         </div>
     </div>
     <div class="col-xs-12 col-lg-offset-1">
         <a ui-sref="user" class="btn btn-danger"><i class="far fa-arrow-alt-circle-left"></i> zurück</a>
-        <button ng-show="userexist" value="speichern" class="btn btn-success" ng-click="edit(user)">speichern</button>
-        <button ng-hide="userexist" class="btn btn-success" ng-click="addNew(user)">hinzufügen</button>
+        <button ng-show="userexist"  class="btn btn-success" ng-click="userForm.$valid && edit(user)">speichern</button>
+        <button ng-hide="userexist" class="btn btn-success" ng-click="userForm.$valid && addNew(user)">hinzufügen</button>
     </div>
 </form>

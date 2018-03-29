@@ -60,9 +60,7 @@
                         templateUrl: 'components/userdevices/userdevices.html',
                         controller: function($scope, UserService){
 
-                            $scope.deviceusers = UserService.getAll();
-
-                            console.log($scope.deviceusers);
+                            $scope.users = UserService.getAll().query();
 
                         }
                     }

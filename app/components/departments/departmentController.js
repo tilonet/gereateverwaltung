@@ -3,7 +3,7 @@
 
     angular.module('department').controller('DepartmentController',  function($scope, DepartmentService, Notification){
 
-        $scope.entries = DepartmentService.getAll();
+        $scope.entries = DepartmentService.getAll().query();
 
         $scope.edit = function(e){
 
