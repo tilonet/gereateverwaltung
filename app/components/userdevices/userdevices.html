@@ -1,6 +1,15 @@
 <h2>Wer hat was?</h2>
 <div ng-controller="DeviceController">
-    <div border="1" ng-repeat="user in users" ng-if="user.userdevices.length">
+    <form>
+        <div class="form-group">
+            <div class="col-md-2">
+                <input ng-model="$ctrl.query" type="text" class="form-control " id="searchInput" placeholder="Suchfeld">
+            </div>
+        </div>
+    </form>
+    <br>
+    <br>
+    <div border="1" ng-repeat="user in users  | filter: $ctrl.query" ng-if="user.userdevices.length">
         <h3>{{user.nameFirst + " " +user.nameLast }} </h3>
         <table class="table table-striped">
             <thead>

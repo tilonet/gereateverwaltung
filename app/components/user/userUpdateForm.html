@@ -22,10 +22,10 @@
     <div class="col-xs-12 col-md-6 col-lg-offset-1">
         <div class="form-group">
             <label for="departmentSelect">Abteilung</label>
-            <select class="form-control"  required id="departmentSelect" ng-model="user.departmentId">
-                <option selected>Bitte wählen</option>
+            <select name="departmentSelect" class="form-control"  required id="departmentSelect" ng-model="user.departmentId">
                 <option ng-value="option.id" ng-selected="option.id === user.departmentId"  ng-repeat="option in departments">{{option.name}}</option>
             </select>
+            <span style="color: red;" ng-show="userForm.departmentSelect.$invalid">Bitte wählen</span>
         </div>
     </div>
     <div class="col-xs-12 col-lg-offset-1">

@@ -1,18 +1,19 @@
 <h2 ng-show="deviceexist">Gerät bearbeiten</h2>
 <h2 ng-hide="deviceexist">Gerät erstellen</h2>
-<form  ng-controller="DeviceController">
+<form  name="deviceForm" ng-controller="DeviceController">
     <div class="col-xs-12 col-md-6 col-lg-offset-1">
         <div class="form-group">
             <label for="name">Name</label>
-            <input type="text" class="form-control" id="name" ng-model="device.name" placeholder="">
+            <input type="text" class="form-control" id="name" ng-model="device.name" required novalidate>
         </div>
     </div>
     <div class="col-xs-12 col-md-6 col-lg-offset-1">
         <div class="form-group">
             <label for="selectStatus">Status</label>
-            <select class="form-control" id="selectStatus" ng-model="device.deviceStatus">
+            <select name="selectStatus" class="form-control" id="selectStatus" ng-model="device.deviceStatus" ng-required="true" required novalidate>
                 <option ng-value="option.key" ng-selected="option.key === device.deviceStatus"  ng-repeat="option in deviceStatus">{{option.trans}}</option>
             </select>
+            <span style="color: red;" ng-show="deviceForm.selectStatus.$invalid">Bitte wählen</span>
         </div>
     </div>
     <div class="col-xs-12 col-md-6 col-lg-offset-1">
@@ -26,29 +27,30 @@
                     <select class="form-control" id="selectAdmin" ng-model="device.deviceAdministratorId">
                         <option ng-value="option.id" ng-selected="option.id === device.deviceAdministratorId"  ng-repeat="option in users">{{option.nameFirst + " " + option.nameLast }}</option>
                     </select>
-                </div>
+               </div>
             </div>
         </div>
     </div>
     <div class="col-xs-12 col-md-6 col-lg-offset-1">
         <div class="form-group">
             <label for="selectUser">Benutzer</label>
-            <select class="form-control" id="selectUser" ng-model="device.assignedUserId">
+            <select  ng-required="deviceForm.selectStatus.$modelValue == 'IN_POSSESSION'|| deviceForm.selectStatus.$modelValue == 'LOANED'" class="form-control" id="selectUser" ng-model="device.assignedUserId">
                 <option ng-value="option.id" ng-selected="option.id === device.assignedUserId"  ng-repeat="option in users">{{option.nameFirst + " " + option.nameLast }}</option>
             </select>
+            <span ng-show="deviceForm.selectStatus.$modelValue == 'IN_POSSESSION' || deviceForm.selectStatus.$modelValue == 'LOANED'" style="color: red">Bitte wählen</span>
         </div>
     </div>
     <div class="col-xs-12 col-md-6 col-lg-offset-1">
         <div class="form-group">
             <label for="selectDepartment">Abteilung</label>
-            <select class="form-control" id="selectDepartment" ng-model="device.departmentId" required>
+            <select class="form-control" id="selectDepartment" ng-model="device.departmentId">
                 <option ng-value="option.id" ng-selected="option.id === device.departmentId"  ng-repeat="option in departments">{{option.name }}</option>
             </select>
         </div>
     </div>
     <div class="col-xs-12 col-lg-offset-1">
         <a ui-sref="devices" class="btn btn-danger"><i class="far fa-arrow-alt-circle-left"></i> zurück</a>
-        <button ng-show="deviceexist" class="btn btn-success" ng-click="edit(device)">speichern</button>
-        <button ng-hide="deviceexist" class="btn btn-success" ng-click="addNew(device)">hinzufügen</button>
+        <button ng-show="deviceexist" class="btn btn-success" ng-click="deviceForm.$valid && edit(device)">speichern</button>
+        <button ng-hide="deviceexist" class="btn btn-success" ng-click="deviceForm.$valid && addNew(device)">hinzufügen</button>
     </div>
 </form>

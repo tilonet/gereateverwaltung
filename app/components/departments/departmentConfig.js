@@ -8,7 +8,7 @@
                 url: '/editDepartment/:id',
                 views: {
                     'menue': {
-                        templateUrl: 'components/menue/menue.html',
+                        templateUrl: 'components/menue/menue.html'
                     },
                     'content@': {
                         templateUrl: 'components/departments/departmentUpdateForm.html',
@@ -35,7 +35,7 @@
                 url: '/addDepartment',
                 views: {
                     'menue': {
-                        templateUrl: 'components/menue/menue.html',
+                        templateUrl: 'components/menue/menue.html'
                     },
                     'content@': {
                         templateUrl: 'components/departments/departmentUpdateForm.html',
@@ -54,19 +54,22 @@
                 url: '/deleteDepartment/:id',
                 views: {
                     'menue': {
-                        templateUrl: 'components/menue/menue.html',
+                        templateUrl: 'components/menue/menue.html'
                     },
                     'content@': {
                         templateUrl: 'components/departments/department.html',
                         controller: function($stateParams, DepartmentService, Notification, $state){
 
                             DepartmentService.delete($stateParams.id).$promise.then(function(){
+
                                 Notification.success('Abteilung erfolgreich gelöscht');
                                 $state.go('departments');
+
                             },function(error){
 
                                 console.log(error);
                                 Notification.error('Fehler aufgetreten');
+
                             });
                         }
                     }

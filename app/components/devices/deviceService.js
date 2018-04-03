@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    angular.module('device').factory('DeviceService', ['$resource', '$filter', '$q', function($resource, $filter, $q) {
+    angular.module('device').factory('DeviceService', ['$resource', '$filter', '$q', '$rootScope', function($resource, $filter, $q, $rootScope) {
 
         var factory = {};
         var users = $resource('http://localhost:8080/user').query();
@@ -9,6 +9,7 @@
 
         factory.getAll = function () {
 
+            $rootScope.lastUpdated = new Date();
             return $resource('http://localhost:8080/device', {}, {
                 query: {
                     method: 'GET',
@@ -47,10 +48,14 @@
         }
 
         factory.getDevice = function(id) {
+
+            $rootScope.lastUpdated = new Date();
             return $resource('http://localhost:8080/device/'+id).get();
         }
 
         factory.update = function(user){
+
+            $rootScope.lastUpdated = new Date();
             return $resource('http://localhost:8080/device/:id', { id: '@_id' }, {
                 update: {
                     method: 'PUT' // this method issues a PUT request
@@ -60,6 +65,7 @@
 
         factory.add = function(device) {
 
+            $rootScope.lastUpdated = new Date();
             return $resource('http://localhost:8080/device', {}, {
                 save:{method: 'POST'}
             }).save(device)
@@ -67,6 +73,7 @@
 
         factory.delete = function(deviceid) {
 
+            $rootScope.lastUpdated = new Date();
             return $resource('http://localhost:8080/device/:id', {id: '@id'}, {
                 delete: {method: 'DELETE'}
             }).delete({ id: deviceid});

@@ -1,7 +1,7 @@
 (function() {
    'use strict';
 
-    angular.module('user').factory('UserService', ['$resource','$q', '$filter', 'DeviceService', 'DepartmentService', function($resource, $q, $filter, DeviceService, DepartmentService) {
+    angular.module('user').factory('UserService', ['$resource','$q', '$filter', 'DeviceService', 'DepartmentService', '$rootScope', function($resource, $q, $filter, DeviceService, DepartmentService, $rootScope) {
 
         var factory = {};
         var devices  = DeviceService.getAll().query();
@@ -9,6 +9,7 @@
 
         factory.getAll = function() {
 
+            $rootScope.lastUpdated = new Date();
             return $resource('http://localhost:8080/user', {id: '@id'}, {
                 query: {
                     method: 'GET',
@@ -46,51 +47,25 @@
             });
         }
 
-
-
-
-    /*    factory.getAll = function() {
-
-            var users = $resource('http://localhost:8080/user').query().$promise;
-            var departments = $resource('http://localhost:8080/department').query().$promise;
-
-            var resultArr = [];
-
-            $q.all([users, departments]).then(function(result){
-                var departments = result[1];
-                var users = result[0];
-
-                users.map(function(item){
-
-                    resultArr.push({
-                        id:         item.id,
-                        nameFirst:  item.nameFirst,
-                        nameLast:   item.nameLast,
-                        email:      item.email,
-                        department: $filter('filter')(departments, {id: item.departmentId}, true)[0].name,
-                        departmentId: item.departmentId
-                    });
-                });
-
-            });
-            return resultArr;
-        }*/
-
         factory.getUser = function(id) {
+
+            $rootScope.lastUpdated = new Date();
             return $resource('http://localhost:8080/user/'+id).get();
         }
 
         factory.update = function(user){
+
+            $rootScope.lastUpdated = new Date();
             return $resource('http://localhost:8080/user/:id', { id: '@_id' }, {
                 update: {
                     method: 'PUT' // this method issues a PUT request
                 }
             }).update({ id: user.id }, user);
-
         }
 
         factory.add = function(user) {
 
+            $rootScope.lastUpdated = new Date();
             return $resource('http://localhost:8080/user', {}, {
                 save:{method: 'POST'}
             }).save(user)
@@ -98,6 +73,7 @@
 
         factory.delete = function(userid) {
 
+            $rootScope.lastUpdated = new Date();
             return $resource('http://localhost:8080/user/:id', {id: '@id'}, {
                 delete: {method: 'DELETE'}
             }).delete({ id: userid});

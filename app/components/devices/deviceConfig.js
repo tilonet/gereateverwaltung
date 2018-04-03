@@ -17,6 +17,7 @@
                             $scope.departments = DepartmentService.getAll().query();
                             $scope.users = UserService.getAll().query();
 
+
                             if($stateParams.id !== 'undefined'){
                                 $scope.device = DeviceService.getDevice($stateParams.id);
                                 $scope.deviceexist = true;
@@ -42,8 +43,8 @@
                         templateUrl: 'components/devices/deviceUpdateForm.html',
                         controller: function($scope, DepartmentService, UserService){
 
-                            $scope.departments = DepartmentService.getAll();
-                            $scope.users = UserService.getAll();
+                            $scope.departments = DepartmentService.getAll().query();
+                            $scope.users = UserService.getAll().query();
                             $scope.deviceexist = false;
                             $scope.device = {};
                         }

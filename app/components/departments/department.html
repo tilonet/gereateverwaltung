@@ -10,22 +10,22 @@
     </form>
     <table class="table table-striped">
         <thead>
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Abkürzung</th>
-        </tr>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Abkürzung</th>
+            </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="department in entries | filter: $ctrl.query">
-            <td>{{department.id}}</td>
-            <td>{{department.name}}</td>
-            <td>{{department.abbreviation}}</td>
-            <td>
-                <a title="Abteilung bearbeiten" ui-sref="editDepartment({id: department.id})" ui-sref-active="active"> <i class="fa fa-edit" style="cursor: pointer;"></i></a>
-                <a title="Abtelung löschen" ui-sref="deleteDepartment({id: department.id})" ui-sref-active="active"> <i class="fa fa-minus-circle" style="color: red; cursor: pointer;"></i></a>
-            </td>
-        </tr>
+            <tr ng-repeat="department in entries | filter: $ctrl.query">
+                <td>{{department.id}}</td>
+                <td>{{department.name}}</td>
+                <td>{{department.abbreviation}}</td>
+                <td>
+                    <a title="Abteilung bearbeiten" ui-sref="editDepartment({id: department.id})" ui-sref-active="active"> <i class="fa fa-edit" style="cursor: pointer;"></i></a>
+                    <a title="Abtelung löschen" ui-sref="deleteDepartment({id: department.id})" ui-sref-active="active"> <i class="fa fa-minus-circle" style="color: red; cursor: pointer;"></i></a>
+                </td>
+            </tr>
         </tbody>
     </table>
 </div>
